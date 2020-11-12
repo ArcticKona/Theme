@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<script type=module>
+			import Builder from "./builder.js"
+			const builder = new Builder( window.document )
+			builder.reg( "test1" , function( ) {
+				return "ok 1";
+			} );
+			builder.reg( "test3" , "web:builder-test-data.htm" );
+			let test6 = window.document.createElement( "div" );
+			test6.innerHTML = "ok 6";
+			builder.reg( "test6" , test6 );
+			builder.reg( "test7.2" , true );
+			builder.run( );
+		</script>
+	</head>
+	<body>
+		<div build="hook:test1">
+			fail 1
+		</div>
+		<div build="script:'ok 2'">
+			fail 2
+		</div>
+		<div build="hook:test3">
+			fail 3
+			</br>
+			fail 4
+		</div>
+		<div build="hook:ok 5 (ignore undefined error)">
+			fail 5
+		</div>
+		<div build="hook:test6">
+			fail 6
+		</div>
+		<div build="part:test7.1">
+			fail 7
+		</div>
+		<div build="part:test7.2">
+			ok 6
+		</div>
+	</body>
+</html>
+
